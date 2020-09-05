@@ -29,7 +29,7 @@ function allPostsData() {
   })
   // Sort posts by date
   return allPostsData.sort((a, b) => {
-      if (a.date < b.date) {
+      if (a['date'] < b['date']) {
           return 1
       } else {
           return -1
@@ -39,13 +39,13 @@ function allPostsData() {
 
 export function getDraftPostsData() {
   return allPostsData().filter(post => {
-    return post.hasOwnProperty('draft') && post.draft === true;
+    return post.hasOwnProperty('draft') && post['draft'] === true;
   });
 }
 
 export function getFinalPostsData() {
   return allPostsData().filter(post => {
-    return !post.hasOwnProperty('draft') || (post.hasOwnProperty('draft') && post.draft === false);
+    return !post.hasOwnProperty('draft') || (post.hasOwnProperty('draft') && post['draft'] === false);
   });
 }
 
