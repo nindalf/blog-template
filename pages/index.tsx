@@ -1,4 +1,4 @@
-import { getSortedPostsData } from '../lib/posts'
+import { getFinalPostsData } from '../lib/posts'
 import Date from '../components/date'
 import Head from 'next/head'
 import Layout, { siteTitle } from '../components/layout'
@@ -32,7 +32,7 @@ export default function Home({ allPostsData }) {
 
 
 export async function getStaticProps() {
-  const allPostsData = getSortedPostsData()
+  const allPostsData = getFinalPostsData()
   return {
     props: {
       allPostsData
