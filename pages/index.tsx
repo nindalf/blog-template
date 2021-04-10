@@ -1,23 +1,23 @@
 import { getFinalPostsData } from '../lib/posts'
-import Date from '../components/date'
-import Layout, { siteTitle } from '../components/layout'
 import Link from 'next/link'
+import Date from '../components/date'
+import Layout from '../components/layout'
 import head from '../components/head'
-import utilStyles from '../styles/utils.module.css'
+import styles from '../styles/utils.module.css'
 
 export default function Home({ allPostsData }) {
   return (
     <Layout home>
       {head(null)}
-      <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-        <ul className={utilStyles.list}>
+      <section className={`${styles.headingMd}`}>
+        <ul className={styles.list}>
           {allPostsData.map(({ id, date, title }) => (
-            <li className={utilStyles.listItem} key={id}>
+            <li className={styles.listItem} key={id}>
               <Link href="/posts/[id]" as={`/posts/${id}`}>
-                <a>{title}</a>
+                {title}
               </Link>
               <br />
-              <small className={utilStyles.lightText}>
+              <small className={styles.lightText}>
                 <Date dateString={date} />
               </small>
             </li>

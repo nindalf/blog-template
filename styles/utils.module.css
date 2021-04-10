@@ -1,50 +1,50 @@
+.headingLg {
+  font-size: 1.5rem;
+  line-height: 1.4;
+  margin: 1rem 0;
+  display: inline;
+  float: right;
+  padding: 14px 16px;
+  /* right: 0; */
+}
 
-  .headingLg {
-    font-size: 1.5rem;
-    line-height: 1.4;
-    margin: 1rem 0;
-    display: inline;
-    float: right;
-    padding: 14px 16px;
-    /* right: 0; */
-  }
-  
-  .headingMd {
-    font-size: 1.2rem;
-    line-height: 1.5;
-  }
-  
-  .aboutImage {
-    width: 100px;
-    height: 100px;
-    align-items: center;
-    display: flex;
-  }
-  
-  .borderCircle {
-    border-radius: 9999px;
-  }
-  
-  .colorInherit {
-    color: inherit;
-  }
-  
-  .padding1px {
-    padding-top: 1px;
-  }
-  
-  .list {
-    list-style: none;
-    padding: 1rem;
-    margin: 0;
-  }
-  
-  .listItem {
-    margin: 0 0 1.25rem;
-    font-size: 25px;
-  }
-  
-  .lightText {
-    color: #999;
-  }
-  
+.headingMd {
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
+.aboutImage {
+  width: 100px;
+  height: 100px;
+  align-items: center;
+  display: flex;
+}
+
+.borderCircle {
+  border-radius: 9999px;
+}
+
+.list {
+  list-style: none;
+  padding: 1rem;
+  margin: 0;
+}
+
+.listItem {
+  margin: 0 0 1.25rem;
+  font-size: 25px;
+}
+
+.lightText {
+  color: #999;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: right;
+}
+
+.backToHome {
+  margin: 3rem 0 0;
+}
