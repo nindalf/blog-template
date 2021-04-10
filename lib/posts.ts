@@ -6,7 +6,7 @@ import html from 'remark-html'
 import strip from 'remark-strip-html'
 import config from '../blog-config.json'
 
-const postsDirectory = path.join(process.cwd(), 'posts')
+const postsDirectory = path.join(process.cwd(), config.postsDirectory)
 
 function allPostsData() {
     // Get file names under /posts
