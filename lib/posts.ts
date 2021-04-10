@@ -4,7 +4,7 @@ import matter from 'gray-matter'
 import remark from 'remark'
 import html from 'remark-html'
 import strip from 'remark-strip-html'
-import config from '../blog-config.json'
+import config from '../../blog-config.json'
 
 const postsDirectory = path.join(process.cwd(), config.postsDirectory)
 

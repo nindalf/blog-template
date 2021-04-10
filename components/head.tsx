@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import config from '../blog-config.json'
+import config from '../../blog-config.json'
 
 export default function head(post_title: string) {
     const title = post_title ? post_title : config.author;
