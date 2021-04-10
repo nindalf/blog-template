@@ -9,13 +9,13 @@ export default function Layout({ children, home }) {
           <ul className={styles.headingLg}>
             <li className={styles.headingLg}>
               <Link href="/">
-                Home
-                </Link>
+                <a>Home</a>
+              </Link>
             </li>
             <li className={styles.headingLg}>
               <Link href="/about">
-                About
-                </Link>
+                <a>About</a>
+              </Link>
             </li>
           </ul>
         </>
