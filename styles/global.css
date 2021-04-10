@@ -1,5 +1,5 @@
 
 /* Assume light mode by default */
-@import 'sakura.css' screen;
+@import 'sakura-earthly.css' screen;
 /* Supersede dark mode when applicable */  
 @import 'sakura-dark.css' screen and (prefers-color-scheme: dark);

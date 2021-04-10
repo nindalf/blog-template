@@ -1,14 +1,14 @@
 import { getFinalPostsData } from '../lib/posts'
 import Date from '../components/date'
-import Head from 'next/head'
 import Layout, { siteTitle } from '../components/layout'
 import Link from 'next/link'
+import head from '../components/head'
 import utilStyles from '../styles/utils.module.css'
 
 export default function Home({ allPostsData }) {
   return (
     <Layout home>
-      <Head>Krishna's thoughts</Head>
+      {head(null)}
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <ul className={utilStyles.list}>
           {allPostsData.map(({ id, date, title }) => (

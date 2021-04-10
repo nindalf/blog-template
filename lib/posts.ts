@@ -3,7 +3,8 @@ import path from 'path'
 import matter from 'gray-matter'
 import remark from 'remark'
 import html from 'remark-html'
-
+import strip from 'remark-strip-html'
+import config from '../blog-config.json'
 
 const postsDirectory = path.join(process.cwd(), 'posts')
 
@@ -83,11 +84,20 @@ export async function getPostData(id) {
     const processedContent = await remark()
         .use(html)
         .process(matterResult.content);
+    
     const contentHtml = processedContent.toString();
+    
+    const plainText = await remark()
+        .use(strip)
+        .process(contentHtml);
+    const wordCount = String(plainText).split(/\s+/).length;
+    const timeToRead = Math.ceil(wordCount/config.readingSpeedPerMin);
 
     // Combine the data with the id
     return {
         id,
+        wordCount,
+        timeToRead,
         contentHtml,
         ...matterResult.data
     };
