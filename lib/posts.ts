@@ -75,23 +75,23 @@ export function getAllPostIds() {
     });
 }
 
-export async function getPostData(id) {
+export function getPostData(id) {
     const fullPath = path.join(postsDirectory, `${id}.md`);
     const fileContents = fs.readFileSync(fullPath, 'utf8');
 
     // Use gray-matter to parse the post metadata section
     const matterResult = matter(fileContents);
-    const processedContent = await remark()
+    const contentHtml = remark()
         .use(html)
-        .process(matterResult.content);
+        .processSync(matterResult.content)
+        .toString();
 
-    const contentHtml = processedContent.toString();
-
-    const plainText = await remark()
+    const plainText = String(remark()
         .use(strip)
-        .process(contentHtml);
-    const wordCount = String(plainText).split(/\s+/).length;
+        .processSync(contentHtml));
+    const wordCount = plainText.split(/\s+/).length;
     const timeToRead = Math.ceil(wordCount / config.readingSpeedPerMin);
+    const preview = plainText.split('\n')[0];
 
     // Combine the data with the id
     return {
@@ -99,6 +99,7 @@ export async function getPostData(id) {
         wordCount,
         timeToRead,
         contentHtml,
+        preview,
         ...matterResult.data
     };
 }
