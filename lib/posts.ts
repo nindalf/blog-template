@@ -2,6 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
 import remark from 'remark'
+import prism from 'remark-prism';
 import html from 'remark-html'
 import strip from 'remark-strip-html'
 import config from '../blog-config.json'
@@ -83,6 +84,7 @@ export function getPostData(id) {
     const matterResult = matter(fileContents);
     const contentHtml = remark()
         .use(html)
+        .use(prism)
         .processSync(matterResult.content)
         .toString();
 

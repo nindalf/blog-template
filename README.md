@@ -14,4 +14,4 @@ You can serve this with nginx, Apache or any CDN like Cloudflare.
 ## Acknowledgements
 
 * This basic structure comes from [this tutorial](https://nextjs.org/learn/basics/), where the end result looks like [this](https://next-learn-starter.now.sh)
-* CSS from [Sakura](https://github.com/oxalorg/sakura)
+* CSS from [Sakura](https://github.com/oxalorg/sakura) and [Prism](https://prismjs.com)
