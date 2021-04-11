@@ -1,5 +1,5 @@
 import styles from '../styles/utils.module.css'
-import config from '../../blog-config.json'
+import config from '../blog-config.json'
 import head from '../components/head'
 
 export default function About() {
