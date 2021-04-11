@@ -8,13 +8,13 @@ export default function Layout({ children, home }) {
         <>
           <ul className={styles.headingLg}>
             <li className={styles.headingLg}>
-              <Link href="/">
-                <a>Home</a>
+              <Link href="/about">
+                <a>About</a>
               </Link>
             </li>
             <li className={styles.headingLg}>
-              <Link href="/about">
-                <a>About</a>
+              <Link href="/">
+                <a>Home</a>
               </Link>
             </li>
           </ul>
