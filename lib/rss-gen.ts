@@ -23,7 +23,8 @@ function generateRSSFeed() {
         <atom:link href="${url}/index.xml" rel="self" type="application/rss+xml" />
         ${items}
     </channel>
-</rss>`;
+</rss>
+`;
 
 }
 
