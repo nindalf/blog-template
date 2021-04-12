@@ -9,7 +9,7 @@ import config from '../blog-config.json'
 
 const postsDirectory = path.join(process.cwd(), config.postsDirectory)
 
-function allPostsData() {
+function allPostsMetadata() {
     // Get file names under /posts
     const fileNames = fs.readdirSync(postsDirectory);
     const allPostsData = fileNames.map(fileName => {
@@ -39,14 +39,14 @@ function allPostsData() {
     });
 }
 
-export function getDraftPostsData() {
-    return allPostsData().filter(post => {
+export function getDraftPostsMetadata() {
+    return allPostsMetadata().filter(post => {
         return post.hasOwnProperty('draft') && post['draft'] === true;
     });
 }
 
-export function getFinalPostsData() {
-    return allPostsData().filter(post => {
+export function getFinalPostsMetaata() {
+    return allPostsMetadata().filter(post => {
         return !post.hasOwnProperty('draft') || (post.hasOwnProperty('draft') && post['draft'] === false);
     });
 }
@@ -76,7 +76,7 @@ export function getAllPostIds() {
     });
 }
 
-export function getPostData(id) {
+export function getPostContent(id) {
     const fullPath = path.join(postsDirectory, `${id}.md`);
     const fileContents = fs.readFileSync(fullPath, 'utf8');
 

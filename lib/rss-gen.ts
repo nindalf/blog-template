@@ -1,6 +1,7 @@
 import fs from 'fs'
-import { getFinalPostsData, getPostData } from './posts'
+import { getFinalPostsMetaata, getPostContent } from './posts'
 import config from '../blog-config.json'
+import { parseISO, format } from 'date-fns'
 
 function writeFeedToDisk() {
     const feed = generateRSSFeed();
@@ -18,7 +19,8 @@ function generateRSSFeed() {
         <link>${url}</link>
         <description>Recent content on ${config.description}</description>
         <language>en-us</language>
-        <lastBuildDate>${lastBuildDate}</lastBuildDate><atom:link href="${url}/index.xml" rel="self" type="application/rss+xml" />
+        <lastBuildDate>${lastBuildDate}</lastBuildDate>
+        <atom:link href="${url}/index.xml" rel="self" type="application/rss+xml" />
         ${items}
     </channel>
 </rss>`;
@@ -26,15 +28,15 @@ function generateRSSFeed() {
 }
 
 function generateRSSItems() {
-    const posts = getFinalPostsData();
+    const posts = getFinalPostsMetaata();
     return posts.map(post => {
-        const postData = getPostData(post.id);
+        const postData = getPostContent(post.id);
         const url = config.baseUrl.replace(/\/+$/, '') + '/posts/' + post.id;
         return `
         <item>
             <title>${post['title']}</title>
             <link>${url}</link>
-            <pubDate>${post['date']}</pubDate>
+            <pubDate>${convertDate(post['date'])}</pubDate>
             <guid>${url}</guid>
             <description>${postData.preview}</description>
         </item>`;
@@ -42,8 +44,14 @@ function generateRSSItems() {
 }
 
 function getLastBuildDate() {
-    const posts = getFinalPostsData();
-    return posts[0]['date'];
+    const posts = getFinalPostsMetaata();
+    return convertDate(posts[0]['date']);
+}
+
+function convertDate(dateString: string) {
+    const date = parseISO(dateString);
+    // formate from https://cyber.harvard.edu/rss/rss.html#optionalChannelElements
+    return format(date, 'iii, dd LLL yyyy HH:mm:ss xx')
 }
 
 writeFeedToDisk();

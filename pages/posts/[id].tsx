@@ -1,4 +1,4 @@
-import { getAllPostIds, getPostData } from '../../lib/posts'
+import { getAllPostIds, getPostContent } from '../../lib/posts'
 import Date from '../../components/date'
 import head from '../../components/head'
 import Layout from '../../components/layout'
@@ -29,7 +29,7 @@ export async function getStaticPaths() {
 
 
 export async function getStaticProps({ params }) {
-    const postData = await getPostData(params.id)
+    const postData = await getPostContent(params.id)
     return {
         props: {
             postData
