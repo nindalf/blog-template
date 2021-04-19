@@ -45,11 +45,26 @@ export function getDraftPostsMetadata() {
     });
 }
 
-export function getFinalPostsMetaata() {
+export function getFinalPostsMetadata() {
     return allPostsMetadata().filter(post => {
         return !post.hasOwnProperty('draft') || (post.hasOwnProperty('draft') && post['draft'] === false);
     });
 }
+
+export function getFinalPostsMetadataByTag(tag: string) {
+    return getFinalPostsMetadata().filter(post => {
+        return post["tags"] && post["tags"].includes(tag);
+    });
+}
+
+export function getAllTags() {
+    return Array.from(new Set(getFinalPostsMetadata()
+        .map(post => post["tags"])
+        .flat()
+        .filter(tag => tag !== null && tag !== undefined)
+    ));
+}
+
 
 export function getAllPostIds() {
     const fileNames = fs.readdirSync(postsDirectory);

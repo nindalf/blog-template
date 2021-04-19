@@ -1,4 +1,4 @@
-import { getFinalPostsMetaata } from '../lib/posts'
+import { getFinalPostsMetadata } from '../lib/posts'
 import Link from 'next/link'
 import Date from '../components/date'
 import Layout from '../components/layout'
@@ -30,7 +30,7 @@ export default function Home({ allPostsData }) {
 
 
 export async function getStaticProps() {
-  const allPostsData = getFinalPostsMetaata()
+  const allPostsData = getFinalPostsMetadata()
   return {
     props: {
       allPostsData
