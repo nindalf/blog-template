@@ -1,5 +1,5 @@
 import fs from 'fs'
-import { getFinalPostsMetaata, getPostContent } from './posts'
+import { getFinalPostsMetadata, getPostContent } from './posts'
 import config from '../blog-config.json'
 import { parseISO, format } from 'date-fns'
 
@@ -29,7 +29,7 @@ function generateRSSFeed() {
 }
 
 function generateRSSItems() {
-    const posts = getFinalPostsMetaata();
+    const posts = getFinalPostsMetadata();
     return posts.map(post => {
         const postData = getPostContent(post.id);
         const url = config.baseUrl.replace(/\/+$/, '') + '/posts/' + post.id;
@@ -45,7 +45,7 @@ function generateRSSItems() {
 }
 
 function getLastBuildDate() {
-    const posts = getFinalPostsMetaata();
+    const posts = getFinalPostsMetadata();
     return convertDate(posts[0]['date']);
 }
 
