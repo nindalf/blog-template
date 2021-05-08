@@ -2,8 +2,10 @@ import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
 import remark from 'remark'
+import headings from 'remark-autolink-headings'
 import prism from 'remark-prism';
 import html from 'remark-html'
+import slug from 'remark-slug'
 import strip from 'remark-strip-html'
 import config from '../blog-config.json'
 
@@ -98,6 +100,8 @@ export function getPostContent(id) {
     // Use gray-matter to parse the post metadata section
     const matterResult = matter(fileContents);
     const contentHtml = remark()
+        .use(slug)
+        .use(headings)
         .use(html)
         .use(prism)
         .processSync(matterResult.content)
