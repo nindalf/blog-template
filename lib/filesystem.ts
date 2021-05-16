@@ -77,7 +77,7 @@ function fetchDirectoryDetails(path: string): FsNode[] {
                 return -1;
             }
             if (a.kind === "file" && b.kind === "file") {
-                a.content.date.localeCompare(b.content.date);
+                return b.content.date.localeCompare(a.content.date);
             }
             return 0;
         });
