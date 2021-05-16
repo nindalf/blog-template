@@ -48,7 +48,7 @@ function fetchDirectoryDetails(path: string): FsNode[] {
                     content: null,
                 }
                 node.content = fetchFileDetails(path);
-                if (node.content.draft || node.content.private) {
+                if (node.content.draft || node.content.private || !node.content.date) {
                     return null;
                 }
                 return node;
