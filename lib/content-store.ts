@@ -30,7 +30,7 @@ class ContentStore {
     getNodesByTag(tag: string): FileNode[] {
         return Object.values(this.urlToNode)
             .map(node => {
-                if (node.kind === 'file') {
+                if (node.kind === 'file' && node.content.tags.includes(tag)) {
                     return node;
                 }
                 return null;
