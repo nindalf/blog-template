@@ -1,24 +1,24 @@
-import { getFinalPostsMetadata } from '../lib/posts'
+import store from '../lib/content-store'
 import Link from 'next/link'
 import Date from '../components/date'
 import Layout from '../components/layout'
 import head from '../components/head'
 import styles from '../styles/utils.module.css'
 
-export default function Home({ allPostsData }) {
+export default function Home({ content }) {
   return (
     <Layout home>
       {head(null)}
       <section className={`${styles.headingMd}`}>
         <ul className={styles.list}>
-          {allPostsData.map(({ id, date, title }) => (
-            <li className={styles.listItem} key={id}>
-              <Link href="/posts/[id]" as={`/posts/${id}`}>
-                <a>{title}</a>
+          {content.map((content) => (
+            <li className={styles.listItem} key={content.slug}>
+              <Link href={content.url}>
+                <a>{content.title}</a>
               </Link>
               <br />
               <small className={styles.lightText}>
-                <Date dateString={date} />
+                <Date dateString={content.date} />
               </small>
             </li>
           ))}
@@ -30,10 +30,10 @@ export default function Home({ allPostsData }) {
 
 
 export async function getStaticProps() {
-  const allPostsData = getFinalPostsMetadata()
+  const content = store.allPublicContent()
   return {
     props: {
-      allPostsData
+      content
     }
   }
 }

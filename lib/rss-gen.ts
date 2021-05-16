@@ -1,5 +1,5 @@
 import fs from 'fs'
-import { getFinalPostsMetadata, getPostContent } from './posts'
+import store from './content-store'
 import config from '../blog-config.json'
 import { parseISO, format } from 'date-fns'
 
@@ -29,10 +29,10 @@ function generateRSSFeed() {
 }
 
 function generateRSSItems() {
-    const posts = getFinalPostsMetadata();
+    const posts = store.allPublicContent();
     return posts.map(post => {
-        const postData = getPostContent(post.id);
-        const url = config.baseUrl.replace(/\/+$/, '') + '/posts/' + post.id;
+        const postData = store.getContent(post.slug);
+        const url = config.baseUrl.replace(/\/+$/, '') + '/posts/' + post.slug;
         return `
         <item>
             <title>${post['title']}</title>
@@ -45,13 +45,13 @@ function generateRSSItems() {
 }
 
 function getLastBuildDate() {
-    const posts = getFinalPostsMetadata();
-    return convertDate(posts[0]['date']);
+    const posts = store.allPublicContent();
+    return convertDate(posts[0].date);
 }
 
 function convertDate(dateString: string) {
     const date = parseISO(dateString);
-    // formate from https://cyber.harvard.edu/rss/rss.html#optionalChannelElements
+    // format from https://cyber.harvard.edu/rss/rss.html#optionalChannelElements
     return format(date, 'iii, dd LLL yyyy HH:mm:ss xx')
 }
 
