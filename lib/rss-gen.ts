@@ -1,5 +1,5 @@
 import fs from 'fs'
-import store from './content-store'
+import { store } from './content-store'
 import config from '../blog-config.json'
 import { parseISO, format } from 'date-fns'
 
@@ -29,24 +29,26 @@ function generateRSSFeed() {
 }
 
 function generateRSSItems() {
-    const posts = store.allPublicContent();
+    const posts = store.getFileChildren(config.root);
     return posts.map(post => {
-        const postData = store.getContent(post.slug);
-        const url = config.baseUrl.replace(/\/+$/, '') + '/posts/' + post.slug;
+        const url = config.baseUrl.replace(/\/+$/, '') + '/' + post.url;
         return `
         <item>
             <title>${post['title']}</title>
             <link>${url}</link>
-            <pubDate>${convertDate(post['date'])}</pubDate>
+            <pubDate>${convertDate(post.content.date)}</pubDate>
             <guid>${url}</guid>
-            <description>${postData.preview}</description>
+            <description>${post.content.preview}</description>
         </item>`;
     }).join('\n');
 }
 
 function getLastBuildDate() {
-    const posts = store.allPublicContent();
-    return convertDate(posts[0].date);
+    const posts = store.getFileChildren(config.root);
+    if (posts.length > 0) {
+        return convertDate(posts[0].content.date);
+    }
+    return convertDate('2021-01-01');
 }
 
 function convertDate(dateString: string) {
