@@ -60,6 +60,9 @@ function fetchDirectoryDetails(path: string): FsNode[] {
                     children: [],
                 }
                 node.children = fetchDirectoryDetails(path);
+                if (node.children.length === 0) {
+                    return null
+                }
                 return node;
             }
             return null;
