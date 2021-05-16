@@ -35,6 +35,32 @@ export interface FileNode {
     content: Content;
 }
 
+export interface Content {
+    date: string,
+    title: string,
+    tags: string[],
+    draft: boolean,
+    private: boolean,
+    contentHtml: string,
+    contentText: string,
+    wordCount: number,
+    timeToRead: number,
+    preview: string,
+}
+
+function createDirectoryNode(url: string, path: string): DirNode {
+    const node: DirNode = {
+        kind: "dir",
+        url: url,
+        children: [],
+    }
+    node.children = fetchDirectoryDetails(path);
+    if (node.children.length === 0) {
+        return null
+    }
+    return node;
+}
+
 function fetchDirectoryDetails(path: string): FsNode[] {
     const children = fs.readdirSync(path)
         .map(item => ospath.join(path, item))
@@ -42,28 +68,10 @@ function fetchDirectoryDetails(path: string): FsNode[] {
             const url = ospath.relative(baseDirectory, path).replace(/\.md$/, '') + ospath.sep;
             const stat = fs.statSync(path)
             if (stat.isFile() && path.endsWith(".md")) {
-                const node: FileNode = {
-                    kind: "file",
-                    url: url,
-                    content: null,
-                }
-                node.content = fetchFileDetails(path);
-                if (node.content.draft || node.content.private || !node.content.date) {
-                    return null;
-                }
-                return node;
+                return createFileNode(url, path);
             }
             if (stat.isDirectory()) {
-                const node: DirNode = {
-                    kind: "dir",
-                    url: url,
-                    children: [],
-                }
-                node.children = fetchDirectoryDetails(path);
-                if (node.children.length === 0) {
-                    return null
-                }
-                return node;
+                return createDirectoryNode(url, path);
             }
             return null;
         })
@@ -87,8 +95,20 @@ function fetchDirectoryDetails(path: string): FsNode[] {
     return children;
 }
 
-function fetchFileDetails(path: string): Content {
+function createFileNode(url: string, path: string): FileNode {
+    const node: FileNode = {
+        kind: "file",
+        url: url,
+        content: null,
+    }
+    node.content = fetchFileDetails(path);
+    if (node.content.draft || node.content.private || !node.content.date) {
+        return null;
+    }
+    return node;
+}
 
+function fetchFileDetails(path: string): Content {
     const fileContents = fs.readFileSync(path, 'utf8');
     const matterResult = matter(fileContents);
     const contentHtml = remark()
@@ -119,17 +139,4 @@ function fetchFileDetails(path: string): Content {
         timeToRead: timeToRead,
         preview: preview,
     }
-}
-
-export interface Content {
-    date: string,
-    title: string,
-    tags: string[],
-    draft: boolean,
-    private: boolean,
-    contentHtml: string,
-    contentText: string,
-    wordCount: number,
-    timeToRead: number,
-    preview: string,
 }
