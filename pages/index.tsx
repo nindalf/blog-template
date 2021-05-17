@@ -1,4 +1,4 @@
-import { store } from '../lib/content-store'
+import store from '../lib/content-store'
 import Link from 'next/link'
 import Date from '../components/date'
 import Layout from '../components/layout'

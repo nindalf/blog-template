@@ -1,4 +1,4 @@
-import { store } from '../lib/content-store'
+import store from '../lib/content-store'
 
 import Date from '../components/date'
 import head from '../components/head'

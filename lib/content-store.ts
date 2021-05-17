@@ -6,6 +6,7 @@ class ContentStore {
     rootNode: DirNode
 
     constructor() {
+        console.log("tree")
         this.rootNode = constructTree();
         this.urlToNode = flattenDirectory(this.rootNode);
     }
@@ -71,7 +72,6 @@ function flattenDirectory(root: FsNode): Record<string, FsNode> {
 }
 
 
-export let store: ContentStore = null;
-if (!store) {
-    store = new ContentStore();
-}
+const store: ContentStore = new ContentStore();
+Object.freeze(store);
+export default store;

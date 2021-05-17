@@ -2,7 +2,7 @@ import React from 'react';
 import { StoryListItem } from '..';
 import head from '../../components/head';
 import Layout from '../../components/layout';
-import { store } from '../../lib/content-store'
+import store from '../../lib/content-store'
 import styles from '../../styles/utils.module.css'
 
 export default function HomeByTag({ nodes }) {

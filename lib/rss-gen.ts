@@ -1,5 +1,5 @@
 import fs from 'fs'
-import { store } from './content-store'
+import store from './content-store'
 import config from '../blog-config.json'
 import { parseISO, format } from 'date-fns'
 
