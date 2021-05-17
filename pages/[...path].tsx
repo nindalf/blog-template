@@ -5,6 +5,7 @@ import head from '../components/head'
 import Layout from '../components/layout'
 import styles from '../styles/utils.module.css'
 import Home from '.'
+import { Content } from '../lib/filesystem'
 
 export default function Post({ node }) {
     if (node.kind === "file") {
@@ -13,9 +14,7 @@ export default function Post({ node }) {
                 {head(node.content.title)}
                 <article>
                     <h1>{node.content.title}</h1>
-                    <div className={styles.lightText}>
-                        <Date dateString={node.content.date} /> <div>{node.content.timeToRead} min read</div>
-                    </div>
+                    {Byline(node.content)}
                     <div dangerouslySetInnerHTML={{ __html: node.content.contentHtml }} />
                 </article>
             </Layout>
@@ -24,6 +23,16 @@ export default function Post({ node }) {
     if (node.kind === "dir") {
         return <Home root={node} />;
     }
+}
+
+function Byline(content: Content) {
+    if (content.skip_byline) {
+        return <div />
+    }
+
+    return <div className={styles.lightText}>
+        <Date dateString={content.date} /> <div>{content.timeToRead} min read</div>
+    </div>
 }
 
 

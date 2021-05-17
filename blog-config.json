@@ -1,8 +1,6 @@
 {
     "author": "TODO author",
     "description": "TODO description",
-    "bio": "TODO bio",
-    "imageUrl": "TODO URL",
     "baseUrl": "https://example.com",
     "readingSpeedPerMin": 200,
     "postsDirectory": "posts",
