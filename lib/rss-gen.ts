@@ -34,7 +34,7 @@ function generateRSSItems() {
         const url = config.baseUrl.replace(/\/+$/, '') + '/' + post.url;
         return `
         <item>
-            <title>${post['title']}</title>
+            <title>${post.content.title}</title>
             <link>${url}</link>
             <pubDate>${convertDate(post.content.date)}</pubDate>
             <guid>${url}</guid>
