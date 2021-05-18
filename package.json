@@ -7,7 +7,7 @@
     "build": "next build && next export && npm run rssGen",
     "start": "next start",
     "export": "next export",
-    "rssGen": "tsc lib/rss-gen.ts --resolveJsonModule --esModuleInterop --lib es2019 && node lib/rss-gen.js"
+    "rssGen": "tsc lib/rss-gen.ts --resolveJsonModule --esModuleInterop --lib es2019 && node lib/rss-gen.js && rm lib/*.js"
   },
   "dependencies": {
     "date-fns": "^2.16.1",
